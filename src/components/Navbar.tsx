@@ -43,7 +43,7 @@ export default function Navbar() {
             style={{ fontFamily: "'Great Vibes', cursive" }}
             className="text-3xl text-primary leading-none tracking-wide select-none"
           >
-            There She Glows
+            On The Glow
           </span>
         </a>
 
