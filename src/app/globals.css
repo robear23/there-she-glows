@@ -1,26 +1,234 @@
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Instrument+Serif:ital@0;1&family=Figtree:wght@300;400;500;600;700&display=swap');
+
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  /* ── Brand Colors ── */
+  --color-primary: #482122;
+  --color-primary-dark: #160707;
+  --color-primary-light: #fce9ea;
+  --color-secondary: #aaaa5c;
+  --color-secondary-dark: #888831;
+  --color-accent: #4c6678;
+
+  /* ── Neutral Scale ── */
+  --color-neutral-50: #f7f5f4;
+  --color-neutral-100: #f2f2f2;
+  --color-neutral-200: #e4e2e0;
+  --color-neutral-300: #bac1c6;
+  --color-neutral-400: #9eb5cd;
+  --color-neutral-500: #5f6e7b;
+  --color-neutral-600: #4c6678;
+  --color-neutral-700: #2e4556;
+  --color-neutral-800: #1a3042;
+  --color-neutral-900: #04080c;
+
+  /* ── Surface Colors ── */
+  --color-surface: #ffffff;
+  --color-surface-raised: #f7f5f4;
+  --color-surface-overlay: #f2f2f2;
+  --color-surface-inverse: #1a3042;
+
+  /* ── Semantic ── */
+  --color-success: #56ad6a;
+  --color-warning: #d97706;
+  --color-error: #d02e2e;
+
+  /* ── Typography ── */
+  --font-heading: 'Instrument Serif', Georgia, 'Times New Roman', serif;
+  --font-body: 'Figtree', Avenir, 'Avenir Next', 'Helvetica Neue', 'Segoe UI', sans-serif;
+
+  /* ── Border Radius ── */
+  --radius-sm: 3px;
+  --radius-md: 12px;
+  --radius-lg: 36px;
+  --radius-xl: 48px;
+  --radius-2xl: 64px;
+
+  /* ── Shadows ── */
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.15);
+  --shadow-md: 0 2px 8px rgba(0,0,0,0.06), 0 3px 12px rgba(0,0,0,0.02);
+  --shadow-lg: 0 2px 10px rgba(0,0,0,0.06), 0 3px 16px rgba(0,0,0,0.02);
+  --shadow-xl: 0 0 10px rgba(0,0,0,0.30);
+  --shadow-focus: 0 0 0 3px rgba(26,48,66,0.20);
+
+  /* ── Easing ── */
+  --ease-out-circ: cubic-bezier(0.215, 0.61, 0.355, 1);
+
+  /* ── Animations ── */
+  --animate-fade-up: fade-up 0.6s cubic-bezier(0.215,0.61,0.355,1) forwards;
+  --animate-float: float 3s ease-in-out infinite;
+  --animate-fade-in: fade-in 0.5s ease-out forwards;
+
+  /* ── Breakpoints (override defaults) ── */
+  --breakpoint-xs: 480px;
+  --breakpoint-sm: 768px;
+  --breakpoint-md: 1100px;
+  --breakpoint-lg: 1400px;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* ── Keyframes ── */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-10px); }
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(72,33,34,0.3); }
+  50%       { box-shadow: 0 0 40px rgba(72,33,34,0.6); }
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+/* ── Base ── */
+html { scroll-behavior: smooth; }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Figtree', Avenir, 'Helvetica Neue', sans-serif;
+  color: #1a3042;
+  background: #ffffff;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
+
+h1, h2, h3, h4 {
+  font-family: 'Instrument Serif', Georgia, serif;
+}
+
+/* ── Scroll-reveal animations ── */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s cubic-bezier(0.215,0.61,0.355,1),
+              transform 0.7s cubic-bezier(0.215,0.61,0.355,1);
+}
+.animate-from-left {
+  opacity: 0;
+  transform: translateX(-40px);
+  transition: opacity 0.7s cubic-bezier(0.215,0.61,0.355,1),
+              transform 0.7s cubic-bezier(0.215,0.61,0.355,1);
+}
+.animate-from-right {
+  opacity: 0;
+  transform: translateX(40px);
+  transition: opacity 0.7s cubic-bezier(0.215,0.61,0.355,1),
+              transform 0.7s cubic-bezier(0.215,0.61,0.355,1);
+}
+.animate-on-scroll.is-visible,
+.animate-from-left.is-visible,
+.animate-from-right.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ── Marquee ── */
+.marquee-track {
+  animation: marquee 25s linear infinite;
+}
+
+/* ── Custom utilities ── */
+.max-w-container { max-width: 1450px; }
+
+/* ── Component classes ── */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #482122;
+  color: #fff;
+  font-family: 'Figtree', sans-serif;
+  font-weight: 500;
+  font-size: 0.875rem;
+  padding: 12px 24px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  transition: background 200ms cubic-bezier(0.215,0.61,0.355,1),
+              transform 200ms cubic-bezier(0.215,0.61,0.355,1),
+              box-shadow 200ms;
+  text-decoration: none;
+  user-select: none;
+}
+.btn-primary:hover {
+  background: #160707;
+  transform: scale(1.02);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06), 0 3px 12px rgba(0,0,0,0.02);
+}
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: transparent;
+  color: #482122;
+  border: 1.5px solid #482122;
+  font-family: 'Figtree', sans-serif;
+  font-weight: 500;
+  font-size: 0.875rem;
+  padding: 12px 24px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background 200ms ease;
+  text-decoration: none;
+  user-select: none;
+}
+.btn-outline:hover { background: #fce9ea; }
+
+.btn-inverse {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #aaaa5c;
+  color: #04080c;
+  font-family: 'Figtree', sans-serif;
+  font-weight: 500;
+  font-size: 0.875rem;
+  padding: 12px 24px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  transition: background 200ms ease;
+  text-decoration: none;
+  user-select: none;
+}
+.btn-inverse:hover { background: #888831; }
+
+.card {
+  background: #f7f5f4;
+  border: 1px solid #e4e2e0;
+  border-radius: 36px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06), 0 3px 12px rgba(0,0,0,0.02);
+  padding: 24px;
+  transition: box-shadow 300ms ease;
+}
+.card:hover {
+  box-shadow: 0 2px 10px rgba(0,0,0,0.06), 0 3px 16px rgba(0,0,0,0.02);
+}
+
+.section-label {
+  font-family: 'Figtree', sans-serif;
+  font-weight: 500;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #aaaa5c;
+  display: block;
+}
+
+/* ── Custom scrollbar ── */
+::-webkit-scrollbar          { width: 6px; }
+::-webkit-scrollbar-track    { background: #f7f5f4; }
+::-webkit-scrollbar-thumb    { background: #482122; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #160707; }
